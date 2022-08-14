@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="alert">
+        <p>Logged In successfully!</p>
+      </div>
+      <div class="header">
+        <h2>Log In</h2>
+      </div>
+      <form id="form" class="form">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" placeholder="username" id="username" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label for="username">Password</label>
+          <input type="password" placeholder="Password" id="password" />
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+        </div>
+        <button>Log In</button>
+      </form>
+      <p>Dont have an account?</p>
+      <a href="signup.html">Click here to Sign up</a>
+    </div>
+    <script>
+      const form = document.getElementById("form");
+      const username = document.getElementById("username");
+      const password = document.getElementById("password");
+      const alertBox = document.querySelector(".alert");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        checkInputs();
+      });
+
+      function checkInputs() {
+        const usernameValue = username.value;
+        const passwordValue = password.value;
+        if (usernameValue === "") {
+          setErrorFor(username, "Username cannot be blank");
+        } else {
+          setSuccessFor(username);
+        }
+
+        if (passwordValue === "") {
+          setErrorFor(password, "Password cannot be blank");
+        } else {
+          setSuccessFor(password);
+        }
+        if (
+          usernameValue === "prakash" ||
+          usernameValue === "lakshya" ||
+          (usernameValue === "sahil" && passwordValue === "crework@234")
+        ) {
+          alertBox.classList.add("show");
+          setTimeout(() => {
+            alertBox.classList.remove("show");
+          }, 2000);
+        }
+      }
+
+      function setErrorFor(input, message) {
+        const formControl = input.parentElement;
+        const small = formControl.querySelector("small");
+        formControl.className = "form-control error";
+        small.innerText = message;
+      }
+
+      function setSuccessFor(input) {
+        const formControl = input.parentElement;
+        formControl.className = "form-control success";
+      }
+    </script>
+  </body>
+</html>
